@@ -1,5 +1,8 @@
 package br.com.projetojpa.model;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,19 +11,36 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_categorias")
-public class Categoria {
+public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
+    private LocalDateTime criadoEm;
+
+    public Categoria() {
+    }
 
     public Categoria(String nome) {
         this.nome = nome;
+        this.criadoEm = LocalDateTime.now();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
     }
 
     @Override
